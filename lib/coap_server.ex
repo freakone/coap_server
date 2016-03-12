@@ -1,0 +1,2 @@
+defmodule CoapServer do
+end
