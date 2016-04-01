@@ -23,7 +23,7 @@ defmodule CoapServer.Mixfile do
   defp deps do
     [
       {:gen_coap, git: "https://github.com/gotthardp/gen_coap.git"},
-      {:coap, path: "../coap"},
+      {:coap, git: "https://github.com/mskv/coap.git"},
       {:apex, "~>0.4.0"}
     ]
   end
