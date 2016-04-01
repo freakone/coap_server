@@ -15,7 +15,8 @@ defmodule CoapServer.Mixfile do
   def application do
     [
       applications: [:logger],
-      mod: {CoapServer, port}
+      mod: {CoapServer, port},
+      env: [coap_port: port, registry_endpoint: 'coap://127.0.0.1:5683/registry']
     ]
   end
 
