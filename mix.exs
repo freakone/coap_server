@@ -13,10 +13,17 @@ defmodule CoapServer.Mixfile do
   end
 
   def application do
+
+    apps = [:nerves, :logger, :nerves_lib, :nerves_io_led]
+
+    if :os.type == {:unix, :darwin} do
+      apps = apps ++ [:nerves_networking]
+    end
+
     [
-      applications: [:logger],
+      applications: apps,
       mod: {CoapServer, port},
-      env: [coap_port: port, registry_endpoint: 'coap://127.0.0.1:5683/registry']
+      env: [coap_port: port, registry_endpoint: 'coap://51.255.50.48:5683/registry']
     ]
   end
 
@@ -24,7 +31,11 @@ defmodule CoapServer.Mixfile do
     [
       {:gen_coap, git: "https://github.com/gotthardp/gen_coap.git"},
       {:coap, git: "https://github.com/mskv/coap.git"},
-      {:apex, "~>0.4.0"}
+      {:apex, "~>0.4.0"},
+      {:nerves, "~> 0.2"},
+      {:nerves_lib, github: "nerves-project/nerves_lib"},
+      {:nerves_networking, github: "nerves-project/nerves_networking", tag: "v0.6.0"},
+      {:nerves_io_led, github: "nerves-project/nerves_io_led"}
     ]
   end
 

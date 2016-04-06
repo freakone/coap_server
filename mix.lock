@@ -1,3 +1,14 @@
 %{"apex": {:hex, :apex, "0.4.0"},
+  "bbmustache": {:hex, :bbmustache, "1.0.4"},
+  "cf": {:hex, :cf, "0.2.1"},
   "coap": {:git, "https://github.com/mskv/coap.git", "75a0cea5ab325a284e1a740ff1592b4050d5c79b", []},
-  "gen_coap": {:git, "https://github.com/gotthardp/gen_coap.git", "fcd54846c86b8b8d4d2c2e81f19afd8bafa89686", []}}
+  "erlware_commons": {:hex, :erlware_commons, "0.19.0"},
+  "exrm": {:hex, :exrm, "1.0.3"},
+  "gen_coap": {:git, "https://github.com/gotthardp/gen_coap.git", "fcd54846c86b8b8d4d2c2e81f19afd8bafa89686", []},
+  "getopt": {:hex, :getopt, "0.8.2"},
+  "nerves": {:hex, :nerves, "0.2.0"},
+  "nerves_io_led": {:git, "https://github.com/nerves-project/nerves_io_led.git", "b81f27fe2df66b7b7f84066ee892becef015a3fe", []},
+  "nerves_lib": {:git, "https://github.com/nerves-project/nerves_lib.git", "78b9e489af7df25c162d4a1130569e7cc301cb48", []},
+  "nerves_networking": {:git, "https://github.com/nerves-project/nerves_networking.git", "7b77c481b368def153b764eff7e5c487f25eed64", [tag: "v0.6.0"]},
+  "providers": {:hex, :providers, "1.6.0"},
+  "relx": {:hex, :relx, "3.18.0"}}
