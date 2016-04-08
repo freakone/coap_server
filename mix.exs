@@ -1,7 +1,8 @@
 defmodule CoapServer.Mixfile do
   use Mix.Project
+  require Logger
 
-  @default_port 5683
+  @default_port 5680
 
   def project do
     [app: :coap_server,
@@ -14,27 +15,27 @@ defmodule CoapServer.Mixfile do
 
   def application do
 
-    apps = [:nerves, :logger, :nerves_lib, :nerves_io_led]
+    apps = [:nerves, :logger, :nerves_lib, :gen_coap, :apex, :coap]
 
-    if :os.type == {:unix, :darwin} do
-      apps = apps ++ [:nerves_networking]
+    if Application.get_env(:coap_server, :rpi) do
+      apps = apps ++ [:ethernet, :nerves_io_led, :apex]
     end
 
     [
       applications: apps,
       mod: {CoapServer, port},
-      env: [coap_port: port, registry_endpoint: 'coap://51.255.50.48:5683/registry']
+      env: [coap_port: port, registry_endpoint: 'coap://192.168.1.101:5683/registry_endpointry']
     ]
   end
 
   defp deps do
     [
-      {:gen_coap, git: "https://github.com/gotthardp/gen_coap.git"},
       {:coap, git: "https://github.com/mskv/coap.git"},
+      {:gen_coap, git: "https://github.com/gotthardp/gen_coap.git"},
       {:apex, "~>0.4.0"},
       {:nerves, "~> 0.2"},
       {:nerves_lib, github: "nerves-project/nerves_lib"},
-      {:nerves_networking, github: "nerves-project/nerves_networking", tag: "v0.6.0"},
+      {:ethernet, github: "cellulose/ethernet"},
       {:nerves_io_led, github: "nerves-project/nerves_io_led"}
     ]
   end

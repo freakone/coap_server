@@ -9,8 +9,9 @@ defmodule CoapServer.Supervisor do
 
   def init(port) do
     children = [
-      supervisor(CoapServer.ServerSupervisor, [port]),
-      worker(Coap.Storage, [[], []])
+      # supervisor(CoapServer.ServerSupervisor, [port]),
+      worker(Coap.Storage, [[], []]),
+      worker(Blinky, [])
     ]
 
     supervise(children, strategy: :one_for_one)

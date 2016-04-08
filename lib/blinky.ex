@@ -13,22 +13,27 @@ defmodule Blinky do
   def start_link() do
     led_list = Application.get_env(:coap_server, :led_list)
     Logger.debug "list of leds to blink is #{inspect led_list}"
-    spawn fn -> blink_list_forever(led_list) end
+    spawn fn -> blink_list_forever(led_list, 0) end
     {:ok, self}
   end
 
   # call blink_led on each led in the list sequence, repeating forever
-  defp blink_list_forever(led_list) do
+  defp blink_list_forever(led_list, num) do
     Enum.each(led_list, &blink(&1))
-    blink_list_forever(led_list)
+    blink_list_forever(led_list, num+1)
   end
 
   # given an led key, turn it on for 100ms then back off
   defp blink(led_key) do
-  #    Logger.debug "blinking led #{inspect led_key}"
-    Led.set [{led_key, true}]
-    :timer.sleep 100
-    Led.set [{led_key, false}]
+    if Application.get_env(:coap_server, :rpi) do
+      Led.set [{led_key, true}]
+      :timer.sleep 200
+      Led.set [{led_key, false}]
+    else
+      Logger.debug "blink"
+      :timer.sleep 1000
+    end
+
   end
 
 end
